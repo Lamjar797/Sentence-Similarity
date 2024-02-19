@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from similarity import model
-from Input import sentences
+from .similarity import model
+from .input.sentences import Sentences
 import time
 app = FastAPI()
 model = model.Similarity()
@@ -12,7 +12,8 @@ async def root():
 
 
 @app.post("/Similarity")
-def similarity(sentences:sentences):
+def similarity(sentences:Sentences):
+    
     start = time.time()
     score = model.compute(sentences.sentence1 , sentences.sentence2)
   
