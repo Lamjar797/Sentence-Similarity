@@ -1,5 +1,6 @@
 import pytest
-from .src.similarity.model import Similarity
+from src.similarity.model import Similarity
+
 
 class Test():
 
