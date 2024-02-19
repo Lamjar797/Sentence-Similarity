@@ -1,17 +1,24 @@
-from similarity.model import Similarity
+from fastapi import FastAPI
+from similarity import model
+from Input import sentences
+import time
+app = FastAPI()
+model = model.Similarity()
+
+@app.get("/")
+async def root():         
+    return {'message' : "Hello World"}
 
 
 
-sentence1 = [
-    "The cat sits outside",
-   
-]
+@app.post("/Similarity")
+def similarity(sentences:sentences):
+    start = time.time()
+    score = model.compute(sentences.sentence1 , sentences.sentence2)
+  
+  
+  
+    compute_time = time.time() - start
 
-sentence2 = [
-    "The dog plays in the garden",
-    
-]
+    return { compute_time : compute_time, score : score}
 
-model = Similarity()
-
-print(model.compute( sentence1 , sentence2))
